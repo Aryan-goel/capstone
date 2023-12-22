@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import 'tailwindcss/tailwind.css';
+import Login from './components/Login'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from './components/Header';
+import OrderStatus from './components/OrderStatus';
+import Warehouse from './components/Warehouse';
+import { ContextProvider } from './contexts/ContextProvider';
+import { useStateContext } from './contexts/ContextProvider';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Line, Area, Bar, Pie, Financial, Employees, Customers, Stacked, Pyramid, ColorMapping } from './pages';
+
+
+
+
+
+const App = () => {
+    const { activeMenu, currentColor, themeSettings } = useStateContext();
+    // const activeMenu = true;
+    return (
+
+        <BrowserRouter>
+            <Header />
+
+            <Routes>
+                <Route exact path="/" element={<Login />} />
+                <Route exact path="/orders" element={<OrderStatus />} />
+                <Route exact path="/home" element={<Warehouse />} />
+                <Route exact path="/line" element={<Line />} />
+                <Route path="/employees" element={<Employees />} />
+                <Route path="/customers" element={<Customers />} />
+                <Route path="/area" element={<Area />} />
+                <Route path="/bar" element={<Bar />} />
+                <Route path="/pie" element={<Pie />} />
+                <Route path="/financial" element={<Financial />} />
+                <Route path="/color-mapping" element={<ColorMapping />} />
+                <Route path="/pyramid" element={<Pyramid />} />
+                <Route path="/stacked" element={<Stacked />} />
+
+            </Routes>
+        </BrowserRouter>
+
+    )
 }
 
-export default App;
+export default App
